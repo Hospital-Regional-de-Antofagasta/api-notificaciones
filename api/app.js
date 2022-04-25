@@ -2,7 +2,9 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const notificaciones = require("./routes/notificaciones");
 const app = express();
+
 
 app.use(express.json());
 app.use(cors());
@@ -19,6 +21,8 @@ mongoose.connect(connection, {
 app.get("/v1/notificaciones/health", (req, res) => {
   res.status(200).send("ready");
 });
+
+app.use("/v1/notificaciones", notificaciones);
 
 if (require.main === module) { // true if file is executed
   process.on("SIGINT",function (){
