@@ -23,12 +23,6 @@ const ConfigApiNotificaciones = mongoose.model(
         color: String,
         icono: String,
       },
-      notificacionesVacias:{
-        titulo: String,
-        mensaje: String,
-        color: String,
-        icono: String,
-      }
     },
     version: Number,
   })

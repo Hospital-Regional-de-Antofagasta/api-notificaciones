@@ -18,12 +18,6 @@ const mensajesPorDefecto = {
     mensaje: "La solicitud no está bien formada.",
     color: "",
     icono: "",
-  },
-  notificacionesVacias: {
-    titulo: "No hay notificaciones",
-    mensaje: "No tiene notificaciones.",
-    color: "",
-    icono: "",
   }
 };
 
