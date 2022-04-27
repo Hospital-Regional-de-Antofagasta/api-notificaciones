@@ -35,8 +35,6 @@ beforeEach(async () => {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     });
-    console.log("notificacionesSeeds:", notificacionesSeeds)
-
     await notificacionesPersonalizadas.create(notificacionesSeeds);
     await ConfigApiNotificaciones.create(configSeed);
 });
@@ -68,7 +66,6 @@ describe("Endpoints", () => {
         it("Intenta obtener notificaciones de un paciente con token y sin notificaciones", async () => {
             const respuesta = await request.get("/v1/notificaciones").set("Authorization", tokenUsuarioSinDatos);
             const notificaciones = respuesta.body;
-            console.log("notificaciones1", notificaciones);
             expect(respuesta.status).toBe(200);
             expect(notificaciones).toEqual([]);
         });
@@ -76,29 +73,28 @@ describe("Endpoints", () => {
         it("Intenta obtener notificaciones de un paciente con token y notificaciones", async () => {
             const respuesta = await request.get("/v1/notificaciones").set("Authorization", token);
             const notificaciones = respuesta.body;
-            console.log("notificaciones2", notificaciones);
             expect(respuesta.status).toBe(200);
             expect(notificaciones.length).toBe(4);
 
             /* Se verifica que vengan ordenadas */
-/*             expect(Date.parse(notificaciones[0].fechaCreacion)).toBe(
-                Date.parse("2020-01-02T14:21:01.643Z")
+             expect(Date.parse(notificaciones[0].fechaCreacion)).toBe(
+                Date.parse("2021-01-02T14:21:01.643Z")
             );
             expect(Date.parse(notificaciones[1].fechaCreacion)).toBe(
-                Date.parse("2019-01-02T14:21:01.643Z")
+                Date.parse("2003-05-02T14:21:01.643Z")
             );
 
-            expect(notificaciones[0].idOneSignal).toBe("22222222");
-            expect(notificaciones[0].tituloEs).toBe("TITULO ES2");
-            expect(notificaciones[0].mensajeEs).toBe("Mensaje ES2");
-            expect(notificaciones[0].tituloEn).toBe("TITULO EN2");
-            expect(notificaciones[0].mensajeEn).toBe("Mensaje EN2");
+            expect(notificaciones[0].idOneSignal).toBe("5555555");
+            expect(notificaciones[0].tituloEs).toBe("TITULO ES5");
+            expect(notificaciones[0].mensajeEs).toBe("Mensaje ES5");
+            expect(notificaciones[0].tituloEn).toBe("TITULO EN5");
+            expect(notificaciones[0].mensajeEn).toBe("Mensaje EN5");
             expect(notificaciones[0].estado).toBe("ENVIADA");
             expect(notificaciones[0].deletedAt).toBe(null);
             expect(notificaciones[0].leida).toBe(true);
             expect(notificaciones[0].fijada).toBe(true);
 
-            expect(notificaciones.rutPaciente).toBeFalsy(); */
+            expect(notificaciones.rutPaciente).toBeFalsy();
 
 
         });
