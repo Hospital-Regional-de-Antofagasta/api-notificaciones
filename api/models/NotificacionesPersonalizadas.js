@@ -16,6 +16,7 @@ const NotificacionesPersonalizadas = mongoose.model("notificaciones_personalizad
     deletedAt: { type: Date, required: false },
     fechaCreacion: { type: Date, required: true },
     leida: { type: Boolean, required: true },
+    fijada: { type: Boolean, required: true },
 }));
 
 module.exports = NotificacionesPersonalizadas;

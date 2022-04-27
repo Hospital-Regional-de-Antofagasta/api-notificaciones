@@ -9,7 +9,8 @@
     "estado": "ENVIADA",
     "deletedAt": "",
     "fechaCreacion": "2019-01-02T14:21:01.643Z",
-    "leida": true
+    "leida": true,
+    "fijada": false
   },
   {
     "idOneSignal": "22222222",
@@ -21,7 +22,8 @@
     "estado": "ENVIADA",
     "deletedAt": "",
     "fechaCreacion": "2020-01-02T14:21:01.643Z",
-    "leida": true
+    "leida": true,
+    "fijada": true
   },
   {
     "idOneSignal": "33333333",
@@ -33,6 +35,7 @@
     "estado": "ENVIADA",
     "deletedAt": "",
     "fechaCreacion": "2021-02-02T14:21:01.643Z",
-    "leida": true
+    "leida": true,
+    "fijada": false
   }
 ]
