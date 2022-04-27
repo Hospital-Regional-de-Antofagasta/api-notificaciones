@@ -1,9 +1,14 @@
-const notificacionPersonalizadas = require("../models/NotificacionPersonalizada");
-//const { getMensajes } = require("../config");
-//const { manejarError } = require("../utils/errorController");
+const notificacionPersonalizadas = require("../models/NotificacionesPersonalizadas");
+const { getMensajes } = require("../config");
 
 exports.getNotificaciones = async (req, res) => {
     
-        console.log("HOLAAAAAAAAAAAAAAAAAAA");
-        res.status(200).send("ready");
-  }; 
+      try {
+            const rutPaciente = req.rutPaciente;
+            const notificaciones =  await notificacionPersonalizadas.find({rutPaciente: rutPaciente,deletedAt: null }).sort({ fechaCreacion: -1 }).exec();
+            return res.status(200).send(notificaciones);
+      } catch (error) {
+      res.status(500).send({ respuesta: await getMensajes("serverError") });
+      }
+
+}; 

@@ -19,6 +19,12 @@ const mensajesPorDefecto = {
     color: "",
     icono: "",
   },
+  notificacionesVacias: {
+    titulo: "No hay notificaciones",
+    mensaje: "No tiene notificaciones.",
+    color: "",
+    icono: "",
+  }
 };
 
 exports.getMensajes = async (tipo) => {

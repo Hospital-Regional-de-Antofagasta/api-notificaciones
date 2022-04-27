@@ -5,8 +5,7 @@ const router = express.Router();
 
  router.get(
     "/",
-    //isAuthenticated,
-    //validarSiPacienteExiste,
+    isAuthenticated,
     notificacionesController.getNotificaciones
   );
 

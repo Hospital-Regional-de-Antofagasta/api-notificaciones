@@ -1,0 +1,38 @@
+[
+  {
+    "idOneSignal": "111111",
+    "tituloEs": "TITULO ES 1",
+    "mensajeEs": "Mensaje ES 1",
+    "tituloEn": "TITULO EN",
+    "mensajeEn": "Mensaje EN",
+    "rutPaciente": "88888888-8",
+    "estado": "ENVIADA",
+    "deletedAt": "",
+    "fechaCreacion": "2019-01-02T14:21:01.643Z",
+    "leida": true
+  },
+  {
+    "idOneSignal": "22222222",
+    "tituloEs": "TITULO ES2",
+    "mensajeEs": "Mensaje ES2",
+    "tituloEn": "TITULO EN2",
+    "mensajeEn": "Mensaje EN2",
+    "rutPaciente": "88888888-8",
+    "estado": "ENVIADA",
+    "deletedAt": "",
+    "fechaCreacion": "2020-01-02T14:21:01.643Z",
+    "leida": true
+  },
+  {
+    "idOneSignal": "33333333",
+    "tituloEs": "TITULO ES3",
+    "mensajeEs": "Mensaje ES3",
+    "tituloEn": "TITULO EN3",
+    "mensajeEn": "Mensaje EN3",
+    "rutPaciente": "11111111-1",
+    "estado": "ENVIADA",
+    "deletedAt": "",
+    "fechaCreacion": "2021-02-02T14:21:01.643Z",
+    "leida": true
+  }
+]
