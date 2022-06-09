@@ -1,6 +1,7 @@
 [{
   "_id": "6269a1947e76176acf6f9894",
   "idOneSignal": "111111",
+  "correlativo": 1,
   "tituloEs": "TITULO ES1",
   "mensajeEs": "Mensaje ES1",
   "tituloEn": "TITULO EN1",
@@ -10,10 +11,13 @@
   "deletedAt": null,
   "fechaCreacion": "2015-01-18T14:21:01.643Z",
   "leida": true,
-  "fijada": false
+  "fijada": false,
+  "codigoEstablecimiento": "HRA",
+  "nombreEstablecimiento": "Hospital Regional Antofagasta Dr. Leonardo Guzmán"
 },{
   "_id": "6269a1947e76176acf6f9895",
   "idOneSignal": "22222222",
+  "correlativo": 2,
   "tituloEs": "TITULO ES2",
   "mensajeEs": "Mensaje ES2",
   "tituloEn": "TITULO EN2",
@@ -23,11 +27,15 @@
   "deletedAt": null,
   "fechaCreacion": "2003-05-02T14:21:01.643Z",
   "leida": true,
-  "fijada": true
+  "fijada": true,
+  "codigoEstablecimiento": "HRA",
+  "nombreEstablecimiento": "Hospital Regional Antofagasta Dr. Leonardo Guzmán"
+
 },
 {
   "_id": "6269a1947e76176acf6f9896",
   "idOneSignal": "33333333",
+  "correlativo": 3,
   "tituloEs": "TITULO ES3",
   "mensajeEs": "Mensaje ES3",
   "tituloEn": "TITULO EN3",
@@ -37,10 +45,14 @@
   "deletedAt": null,
   "fechaCreacion": "2017-02-02T14:21:01.643Z",
   "leida": true,
-  "fijada": false
+  "fijada": false,
+  "codigoEstablecimiento": "HRA",
+  "nombreEstablecimiento": "Hospital Regional Antofagasta Dr. Leonardo Guzmán"
+
 },{
   "_id":  "6269a1947e76176acf6f9897",
   "idOneSignal": "4444444",
+  "correlativo": 4,
   "tituloEs": "TITULO ES4",
   "mensajeEs": "Mensaje ES4",
   "tituloEn": "TITULO EN4",
@@ -50,10 +62,14 @@
   "deletedAt": null,
   "fechaCreacion": "2020-01-02T14:21:01.643Z",
   "leida": true,
-  "fijada": false
+  "fijada": false,
+  "codigoEstablecimiento": "HRA",
+  "nombreEstablecimiento": "Hospital Regional Antofagasta Dr. Leonardo Guzmán"
+
 },{
   "_id": "6269a1947e76176acf6f9898",
   "idOneSignal": "5555555",
+  "correlativo": 5,
   "tituloEs": "TITULO ES5",
   "mensajeEs": "Mensaje ES5",
   "tituloEn": "TITULO EN5",
@@ -63,10 +79,14 @@
   "deletedAt": null,
   "fechaCreacion": "2021-01-02T14:21:01.643Z",
   "leida": true,
-  "fijada": true
+  "fijada": true,
+  "codigoEstablecimiento": "HRA",
+  "nombreEstablecimiento": "Hospital Regional Antofagasta Dr. Leonardo Guzmán"
+
 },{
   "_id": "6269a1947e76176acf6f9899",
   "idOneSignal": "666666666666",
+  "correlativo": 6,
   "tituloEs": "TITULO ES6",
   "mensajeEs": "Mensaje ES6",
   "tituloEn": "TITULO EN6",
@@ -76,5 +96,8 @@
   "deletedAt": null,
   "fechaCreacion": "2021-02-02T14:21:01.643Z",
   "leida": true,
-  "fijada": false
+  "fijada": false,
+  "codigoEstablecimiento": "HRA",
+  "nombreEstablecimiento": "Hospital Regional Antofagasta Dr. Leonardo Guzmán"
+
 }]
