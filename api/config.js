@@ -18,7 +18,7 @@ const mensajesPorDefecto = {
     mensaje: "La solicitud no está bien formada.",
     color: "",
     icono: "",
-  }
+  },
 };
 
 exports.getMensajes = async (tipo) => {

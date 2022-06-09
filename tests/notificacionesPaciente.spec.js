@@ -100,7 +100,9 @@ describe("Endpoints", () => {
       expect(notificaciones[0].leida).toBe(true);
       expect(notificaciones[0].fijada).toBe(true);
       expect(notificaciones[0].codigoEstablecimiento).toBe("HRA");
-      expect(notificaciones[0].nombreEstablecimiento).toBe("Hospital Regional Antofagasta Dr. Leonardo Guzmán");
+      expect(notificaciones[0].nombreEstablecimiento).toBe(
+        "Hospital Regional Antofagasta Dr. Leonardo Guzmán"
+      );
 
       expect(notificaciones.rutPaciente).toBeFalsy();
     });
