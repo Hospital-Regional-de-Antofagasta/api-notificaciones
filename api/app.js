@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const notificaciones = require("./routes/notificaciones");
+const notificacionesPersonalizada = require("./routes/notificacionesPersonalizada");
 const app = express();
 
 app.use(express.json());
@@ -21,7 +21,7 @@ app.get("/v1/notificaciones/health", (req, res) => {
   res.status(200).send("ready");
 });
 
-app.use("/v1/notificaciones", notificaciones);
+app.use("/v1/notificaciones-personalizadas", notificacionesPersonalizada);
 
 if (require.main === module) {
   // true if file is executed
