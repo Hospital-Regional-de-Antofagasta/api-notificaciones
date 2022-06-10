@@ -389,4 +389,72 @@ describe("Endpoints notificaciones personalizadas", () => {
       expect(notificacionCreada.fijada).toBeTruthy();
     });
   });
+  describe("DELETE /v1/notificaciones-personalizadas/:idOneSignal", () => {
+    it("Debería retornar error si no se recibe token.", async () => {
+      const respuesta = await request.delete(
+        "/v1/notificaciones-personalizadas/4444444"
+      );
+
+      const mensaje = await getMensajes("forbiddenAccess");
+
+      expect(respuesta.status).toBe(401);
+      expect(respuesta.body.respuesta).toEqual({
+        titulo: mensaje.titulo,
+        mensaje: mensaje.mensaje,
+        color: mensaje.color,
+        icono: mensaje.icono,
+      });
+    });
+    it("Debería retornar error si el token es invalido.", async () => {
+      const respuesta = await request
+        .delete("/v1/notificaciones-personalizadas/111111")
+        .set("Authorization", "token");
+
+      const mensaje = await getMensajes("forbiddenAccess");
+
+      expect(respuesta.status).toBe(401);
+      expect(respuesta.body.respuesta).toEqual({
+        titulo: mensaje.titulo,
+        mensaje: mensaje.mensaje,
+        color: mensaje.color,
+        icono: mensaje.icono,
+      });
+    });
+    it("Debería retornar error si la notificación no existe.", async () => {
+      const respuesta = await request
+        .delete("/v1/notificaciones-personalizadas/4444445")
+        .set("Authorization", token);
+
+      const mensaje = await getMensajes("badRequest");
+
+      expect(respuesta.status).toBe(400);
+      expect(respuesta.body.respuesta).toEqual({
+        titulo: mensaje.titulo,
+        mensaje: mensaje.mensaje,
+        color: mensaje.color,
+        icono: mensaje.icono,
+      });
+    });
+    it("Debería eliminar la notificación.", async () => {
+      const respuesta = await request
+        .delete("/v1/notificaciones-personalizadas/4444444")
+        .set("Authorization", token);
+
+      const mensaje = await getMensajes("success");
+
+      expect(respuesta.status).toBe(200);
+      expect(respuesta.body.respuesta).toEqual({
+        titulo: mensaje.titulo,
+        mensaje: mensaje.mensaje,
+        color: mensaje.color,
+        icono: mensaje.icono,
+      });
+
+      const notificacionEliminada = await NotificacionesPersonalizadas.findOne({
+        idOneSignal: "4444444",
+      }).exec();
+
+      expect(notificacionEliminada.deletedAt).toBeTruthy();
+    });
+  });
 });

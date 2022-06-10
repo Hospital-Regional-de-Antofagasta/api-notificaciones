@@ -40,3 +40,23 @@ exports.updateNotificacion = async (req, res) => {
     await handleError(res, error);
   }
 };
+
+exports.deleteNotificacion = async (req, res) => {
+  try {
+    const rutPaciente = req.rutPaciente;
+    const { idOneSignal } = req.params;
+
+    await NotificacionPersonalizadas.updateOne(
+      {
+        rutPaciente,
+        idOneSignal,
+      },
+      { deletedAt: new Date() },
+      { runValidators: true }
+    ).exec();
+
+    return res.status(200).send({ respuesta: await getMensajes("success") });
+  } catch (error) {
+    await handleError(res, error);
+  }
+};

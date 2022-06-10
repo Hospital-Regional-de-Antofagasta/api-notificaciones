@@ -23,4 +23,11 @@ router.put(
   notificacionesPersonalizadaController.updateNotificacion
 );
 
+router.delete(
+  "/:idOneSignal",
+  isAuthenticated,
+  validarNotificacionExiste,
+  notificacionesPersonalizadaController.deleteNotificacion
+);
+
 module.exports = router;
