@@ -33,12 +33,7 @@ exports.handleError = async (res, error) => {
   await sendServerError(res);
 };
 
-exports.sendCustomError = async (
-  res,
-  statusCode,
-  message,
-  errorDetails
-) => {
+exports.sendCustomError = async (res, statusCode, message, errorDetails) => {
   if (process.env.NODE_ENV === "dev" || process.env.NODE_ENV === "test")
     return res.status(statusCode).send({
       respuesta: await getMensajes(message),

@@ -18,6 +18,12 @@
         "mensaje": "La solicitud no está bien formada. -test",
         "color": " -test",
         "icono": " -test"
+      },
+      "success": {
+        "titulo": "Acción Realizada -test",
+        "mensaje": "La acción fue realizada con éxito. -test",
+        "color": " -test",
+        "icono": " -test"
       }
     },
     "version": 1
