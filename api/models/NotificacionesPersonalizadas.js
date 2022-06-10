@@ -33,6 +33,10 @@ const NotificacionesPersonalizadas = mongoose.model(
         type: String,
         required: [true, "El estado es obligatorio."],
         default: "ENVIADA",
+        enum: {
+          values: ["ENVIADA", "RECIBIDA", "ABIERTA"],
+          message: "El estado '{VALUE}' no es válido.",
+        },
       },
       fechaCreacion: {
         type: Date,

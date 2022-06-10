@@ -52,13 +52,11 @@ describe("Endpoints notificaciones personalizadas", () => {
       const mensaje = await getMensajes("forbiddenAccess");
 
       expect(respuesta.status).toBe(401);
-      expect(respuesta.body).toEqual({
-        respuesta: {
-          titulo: mensaje.titulo,
-          mensaje: mensaje.mensaje,
-          color: mensaje.color,
-          icono: mensaje.icono,
-        },
+      expect(respuesta.body.respuesta).toEqual({
+        titulo: mensaje.titulo,
+        mensaje: mensaje.mensaje,
+        color: mensaje.color,
+        icono: mensaje.icono,
       });
     });
     it("Intenta obtener notificaciones de un paciente sin notificaciones", async () => {
@@ -110,6 +108,285 @@ describe("Endpoints notificaciones personalizadas", () => {
       );
       expect(notificaciones[0].__v).toBeFalsy();
       expect(notificaciones[0].deletedAt).toBeFalsy();
+    });
+  });
+  describe("PUT /v1/notificaciones-personalizadas/:idOneSignal", () => {
+    it("Debería retornar error si no se recibe token.", async () => {
+      const respuesta = await request
+        .put("/v1/notificaciones-personalizadas/4444444")
+        .send({
+          estado: "ABIERTA",
+          leida: true,
+          fijada: true,
+        });
+
+      const mensaje = await getMensajes("forbiddenAccess");
+
+      expect(respuesta.status).toBe(401);
+      expect(respuesta.body.respuesta).toEqual({
+        titulo: mensaje.titulo,
+        mensaje: mensaje.mensaje,
+        color: mensaje.color,
+        icono: mensaje.icono,
+      });
+    });
+    it("Debería retornar error si el token es invalido.", async () => {
+      const respuesta = await request
+        .put("/v1/notificaciones-personalizadas/111111")
+        .set("Authorization", "token")
+        .send({
+          estado: "ABIERTA",
+          leida: true,
+          fijada: true,
+        });
+
+      const mensaje = await getMensajes("forbiddenAccess");
+
+      expect(respuesta.status).toBe(401);
+      expect(respuesta.body.respuesta).toEqual({
+        titulo: mensaje.titulo,
+        mensaje: mensaje.mensaje,
+        color: mensaje.color,
+        icono: mensaje.icono,
+      });
+    });
+    it("Debería retornar error si no se envía la notificación (body vacío).", async () => {
+      const respuesta = await request
+        .put("/v1/notificaciones-personalizadas/4444444")
+        .set("Authorization", token)
+        .send();
+
+      const mensaje = await getMensajes("badRequest");
+
+      expect(respuesta.status).toBe(400);
+      expect(respuesta.body.respuesta).toEqual({
+        titulo: mensaje.titulo,
+        mensaje: mensaje.mensaje,
+        color: mensaje.color,
+        icono: mensaje.icono,
+      });
+    });
+    it("Debería retornar error si no se envía la notificación (objeto vacío).", async () => {
+      const respuesta = await request
+        .put("/v1/notificaciones-personalizadas/4444444")
+        .set("Authorization", token)
+        .send({});
+
+      const mensaje = await getMensajes("badRequest");
+
+      expect(respuesta.status).toBe(400);
+      expect(respuesta.body.respuesta).toEqual({
+        titulo: mensaje.titulo,
+        mensaje: mensaje.mensaje,
+        color: mensaje.color,
+        icono: mensaje.icono,
+      });
+    });
+    it("Debería retornar error si la notificación no existe.", async () => {
+      const respuesta = await request
+        .put("/v1/notificaciones-personalizadas/4444445")
+        .set("Authorization", token)
+        .send({
+          estado: "ABIERTA",
+          leida: true,
+          fijada: true,
+        });
+
+      const mensaje = await getMensajes("badRequest");
+
+      expect(respuesta.status).toBe(400);
+      expect(respuesta.body.respuesta).toEqual({
+        titulo: mensaje.titulo,
+        mensaje: mensaje.mensaje,
+        color: mensaje.color,
+        icono: mensaje.icono,
+      });
+    });
+    it("Debería retornar error si el estado no es válido.", async () => {
+      const respuesta = await request
+        .put("/v1/notificaciones-personalizadas/4444444")
+        .set("Authorization", token)
+        .send({
+          estado: "ABIERTAA",
+          leida: true,
+          fijada: true,
+        });
+
+      const mensaje = await getMensajes("badRequest");
+
+      expect(respuesta.status).toBe(400);
+      expect(respuesta.body.respuesta).toEqual({
+        titulo: mensaje.titulo,
+        mensaje: mensaje.mensaje,
+        color: mensaje.color,
+        icono: mensaje.icono,
+      });
+    });
+    it("Debería retornar error si el valor de leída no es válido.", async () => {
+      const respuesta = await request
+        .put("/v1/notificaciones-personalizadas/4444444")
+        .set("Authorization", token)
+        .send({
+          estado: "ABIERTA",
+          leida: "leida",
+          fijada: true,
+        });
+
+      const mensaje = await getMensajes("badRequest");
+
+      expect(respuesta.status).toBe(400);
+      expect(respuesta.body.respuesta).toEqual({
+        titulo: mensaje.titulo,
+        mensaje: mensaje.mensaje,
+        color: mensaje.color,
+        icono: mensaje.icono,
+      });
+    });
+    it("Debería retornar error si el valor de fijada no es válido.", async () => {
+      const respuesta = await request
+        .put("/v1/notificaciones-personalizadas/4444444")
+        .set("Authorization", token)
+        .send({
+          estado: "ABIERTA",
+          leida: true,
+          fijada: "fijada",
+        });
+
+      const mensaje = await getMensajes("badRequest");
+
+      expect(respuesta.status).toBe(400);
+      expect(respuesta.body.respuesta).toEqual({
+        titulo: mensaje.titulo,
+        mensaje: mensaje.mensaje,
+        color: mensaje.color,
+        icono: mensaje.icono,
+      });
+    });
+    it("Debería retornar error si la notificación no le pertenece al usuario.", async () => {
+      const respuesta = await request
+        .put("/v1/notificaciones-personalizadas/666666666666")
+        .set("Authorization", token)
+        .send({
+          estado: "ABIERTA",
+          leida: true,
+          fijada: true,
+        });
+
+      const mensaje = await getMensajes("badRequest");
+
+      expect(respuesta.status).toBe(400);
+      expect(respuesta.body.respuesta).toEqual({
+        titulo: mensaje.titulo,
+        mensaje: mensaje.mensaje,
+        color: mensaje.color,
+        icono: mensaje.icono,
+      });
+    });
+    it("Debería actualizar la notificación si solo se recibe el estado.", async () => {
+      const respuesta = await request
+        .put("/v1/notificaciones-personalizadas/4444444")
+        .set("Authorization", token)
+        .send({
+          estado: "ABIERTA",
+        });
+
+      const mensaje = await getMensajes("success");
+
+      expect(respuesta.status).toBe(200);
+      expect(respuesta.body.respuesta).toEqual({
+        titulo: mensaje.titulo,
+        mensaje: mensaje.mensaje,
+        color: mensaje.color,
+        icono: mensaje.icono,
+      });
+
+      const notificacionCreada = await NotificacionesPersonalizadas.findOne({
+        idOneSignal: "4444444",
+      });
+
+      expect(notificacionCreada.estado).toBe("ABIERTA");
+      expect(notificacionCreada.leida).toBeFalsy();
+      expect(notificacionCreada.fijada).toBeFalsy();
+    });
+    it("Debería actualizar la notificación si solo se recibe el valor de leída.", async () => {
+      const respuesta = await request
+        .put("/v1/notificaciones-personalizadas/4444444")
+        .set("Authorization", token)
+        .send({
+          leida: true,
+        });
+
+      const mensaje = await getMensajes("success");
+
+      expect(respuesta.status).toBe(200);
+      expect(respuesta.body.respuesta).toEqual({
+        titulo: mensaje.titulo,
+        mensaje: mensaje.mensaje,
+        color: mensaje.color,
+        icono: mensaje.icono,
+      });
+
+      const notificacionCreada = await NotificacionesPersonalizadas.findOne({
+        idOneSignal: "4444444",
+      });
+
+      expect(notificacionCreada.estado).toBe("ENVIADA");
+      expect(notificacionCreada.leida).toBeTruthy();
+      expect(notificacionCreada.fijada).toBeFalsy();
+    });
+    it("Debería actualizar la notificación si solo se recibe el valor de fijada.", async () => {
+      const respuesta = await request
+        .put("/v1/notificaciones-personalizadas/4444444")
+        .set("Authorization", token)
+        .send({
+          fijada: true,
+        });
+
+      const mensaje = await getMensajes("success");
+
+      expect(respuesta.status).toBe(200);
+      expect(respuesta.body.respuesta).toEqual({
+        titulo: mensaje.titulo,
+        mensaje: mensaje.mensaje,
+        color: mensaje.color,
+        icono: mensaje.icono,
+      });
+
+      const notificacionCreada = await NotificacionesPersonalizadas.findOne({
+        idOneSignal: "4444444",
+      });
+
+      expect(notificacionCreada.estado).toBe("ENVIADA");
+      expect(notificacionCreada.leida).toBeFalsy();
+      expect(notificacionCreada.fijada).toBeTruthy();
+    });
+    it("Debería actualizar la notificación.", async () => {
+      const respuesta = await request
+        .put("/v1/notificaciones-personalizadas/4444444")
+        .set("Authorization", token)
+        .send({
+          estado: "ABIERTA",
+          leida: true,
+          fijada: true,
+        });
+
+      const mensaje = await getMensajes("success");
+
+      expect(respuesta.status).toBe(200);
+      expect(respuesta.body.respuesta).toEqual({
+        titulo: mensaje.titulo,
+        mensaje: mensaje.mensaje,
+        color: mensaje.color,
+        icono: mensaje.icono,
+      });
+
+      const notificacionCreada = await NotificacionesPersonalizadas.findOne({
+        idOneSignal: "4444444",
+      });
+
+      expect(notificacionCreada.estado).toBe("ABIERTA");
+      expect(notificacionCreada.leida).toBeTruthy();
+      expect(notificacionCreada.fijada).toBeTruthy();
     });
   });
 });
